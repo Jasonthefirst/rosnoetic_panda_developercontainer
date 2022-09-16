@@ -4,7 +4,7 @@
 	"name": "ROSDockerNoetic",
 	"dockerComposeFile": "./docker-compose.yml",
 	"service": "roscontainer",
-	"workspaceFolder": "/home",
+	"workspaceFolder": "/workspace",
 	"extensions": [
 		"yhpnoraa.beauty",
 		"magicstack.magicpython",

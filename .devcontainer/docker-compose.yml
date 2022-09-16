@@ -9,6 +9,8 @@ services:
     ports: 
       - 11311:11311
     network_mode: "host"
+    volumes:
+      - ..:/workspace:cached
     command: sleep infinity
     deploy:
       resources:
