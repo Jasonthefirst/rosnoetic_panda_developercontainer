@@ -1,0 +1,17 @@
+version: '3.9'
+services: 
+  roscontainer: 
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    cap_add:
+      - SYS_NICE
+    ports: 
+      - 11311:11311
+    network_mode: "host"
+    command: sleep infinity
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]

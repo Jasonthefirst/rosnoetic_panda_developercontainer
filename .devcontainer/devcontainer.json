@@ -1,0 +1,21 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/ubuntu
+{
+	"name": "ROSDockerNoetic",
+	"dockerComposeFile": "./docker-compose.yml",
+	"service": "roscontainer",
+	"workspaceFolder": "/home",
+	"extensions": [
+		"yhpnoraa.beauty",
+		"magicstack.magicpython",
+		"ms-python.vscode-pylance",
+		"ms-toolsai.jupyter",
+		"ms-toolsai.jupyter-keymap",
+		"donjayamanne.python-extension-pack"
+	],
+
+	"features": {
+		"git": "latest",
+		"git-lfs": "latest"
+	}
+}
