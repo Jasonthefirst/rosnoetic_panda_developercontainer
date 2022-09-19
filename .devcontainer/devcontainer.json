@@ -12,7 +12,8 @@
 		"ms-python.vscode-pylance",
 		"ms-toolsai.jupyter",
 		"ms-toolsai.jupyter-keymap",
-		"donjayamanne.python-extension-pack"
+		"donjayamanne.python-extension-pack",
+		"ms-iot.vscode-ros"
 	],
 
 	"features": {
