@@ -12,8 +12,8 @@ services:
     volumes:
       - ..:/workspace:cached
     command: sleep infinity
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: ["gpu"]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities: ["gpu"]
