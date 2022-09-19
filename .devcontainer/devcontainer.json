@@ -16,6 +16,11 @@
 
 	"features": {
 		"git": "latest",
-		"git-lfs": "latest"
+		"git-lfs": "latest",
+		"desktop-lite": {
+			"password": "vscode",
+			"webPort": "6080",
+			"vncPort": "5901"
+		}
 	}
 }
