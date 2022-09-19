@@ -5,6 +5,7 @@
 	"dockerComposeFile": "./docker-compose.yml",
 	"service": "roscontainer",
 	"workspaceFolder": "/workspace",
+	"forwardPorts": [6080],
 	"extensions": [
 		"yhpnoraa.beauty",
 		"magicstack.magicpython",
