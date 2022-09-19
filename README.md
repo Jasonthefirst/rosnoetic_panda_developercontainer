@@ -62,3 +62,22 @@ Mit dem Befehl:
 Um ein eigenes ROS Package zu erstellen müsst ihr ein catkin package in /workspace/catkin_ws/src erstellen (oder reinclonen). http://wiki.ros.org/ROS/Tutorials/CreatingPackage
 
 mit "catkin_make" in /workspace/catkin_ws wird dieses Package kompiliert und alle Funktionen stehen zur Verfügung nachdem ihr mit source /workspace/catkin_ws/devel/setup.bash den Workspace gesourced habt.
+
+
+## Fehlerbehebung:
+
+### Probleme beim Clonen in einen Remote development container
+Falls das Clonen eines Remote Developmentcontainers nicht funktionieren sollte, probiert ob ihr es in den Folder "workspace" clonen könnt. 
+
+
+### Probleme beim Starten des Containers
+Eventuell ist keine geeignete GPU vorhanden. Kommentiert dann den Teil:
+
+''' deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
+'''
+
+im Dockerfile aus. 
