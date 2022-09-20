@@ -5,9 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dirmngr \
-    gnupg2 \
-    && rm -rf /var/lib/apt/lists/*
-
+    gnupg2 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends ros-noetic-franka-ros ros-noetic-moveit ros-noetic-effort-controllers git sudo nano python3-pip \
@@ -15,7 +13,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
                        ros-noetic-convex-decomposition ros-noetic-ivcon \
                        git-core python3-wstool python3-vcstools python3-rosdep ros-noetic-control-msgs \
                        ros-noetic-xacro ros-noetic-tf2-ros ros-noetic-rviz ros-noetic-cv-bridge \
-                       ros-noetic-actionlib ros-noetic-actionlib-msgs ros-noetic-dynamic-reconfigure \
+                       ros-noetic-actionlib ros-noetic-actionlib-msgs ros-noetic-dynamic-reconfigure ros-noetic-rosparam-shortcuts\
                        ros-noetic-trajectory-msgs ros-noetic-moveit \
                        ros-noetic-octomap-rviz-plugins \
                        ros-noetic-control-toolbox ros-noetic-catkin python3-catkin-tools \
@@ -25,8 +23,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
                        ros-noetic-tf-conversions ros-noetic-kdl-parser \ 
                        ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-gazebo-ros-control \
                        ros-noetic-libfranka python3-osrf-pycommon \
-                       build-essential python3-dev swig python3-pygame && \
-    rm -rf /var/lib/apt/lists/*
+                       build-essential python3-dev swig python3-pygame
 
 RUN pip3 install future numpy numpy-quaternion==2020.5.11.13.33.35 \
     pygame decorator matplotlib Pillow scipy scikit-learn osrf-pycommon
