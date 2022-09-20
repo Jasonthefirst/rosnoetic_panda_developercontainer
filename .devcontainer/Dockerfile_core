@@ -1,20 +1,46 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/ubuntu/.devcontainer/base.Dockerfile
 
 FROM osrf/ros:noetic-desktop-full
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    dirmngr \
+    gnupg2 \
+    && rm -rf /var/lib/apt/lists/*
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends ros-noetic-libfranka ros-noetic-franka-ros ros-noetic-moveit ros-noetic-effort-controllers git
+    && apt-get -y install --no-install-recommends ros-noetic-franka-ros ros-noetic-moveit ros-noetic-effort-controllers git sudo nano python3-pip \
+                    python3-scipy libprotobuf-dev protobuf-compiler libboost-all-dev \
+                       ros-noetic-convex-decomposition ros-noetic-ivcon \
+                       git-core python3-wstool python3-vcstools python3-rosdep ros-noetic-control-msgs \
+                       ros-noetic-joystick-drivers ros-noetic-xacro ros-noetic-tf2-ros ros-noetic-rviz ros-noetic-cv-bridge \
+                       ros-noetic-actionlib ros-noetic-actionlib-msgs ros-noetic-dynamic-reconfigure \
+                       ros-noetic-trajectory-msgs ros-noetic-moveit \
+                       ros-noetic-octomap-rviz-plugins \
+                       ros-noetic-control-toolbox ros-noetic-catkin python3-catkin-tools \
+                       ros-noetic-moveit-visual-tools \
+                       ros-noetic-rospy-message-converter \
+                       ros-noetic-realtime-tools ros-noetic-ros-controllers \
+                       ros-noetic-tf-conversions ros-noetic-kdl-parser \ 
+                       ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-gazebo-ros-control \
+                       ros-noetic-libfranka python3-osrf-pycommon \
+                       build-essential python3-dev swig python3-pygame && \
+    rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install future numpy numpy-quaternion==2020.5.11.13.33.35 \
+    pygame decorator matplotlib Pillow scipy scikit-learn osrf-pycommon
 
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 RUN rosdep update
-
-RUN apt install -y --no-install-recommends ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon python3-wstool python3-pip
 
 RUN mkdir -p ~/ws_moveit/src
 RUN cd ~/ws_moveit/src && wstool init . && wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall && wstool remove  moveit_tutorials && wstool update -t .
 RUN cd ~/ws_moveit/src git clone https://github.com/ros-planning/moveit_tutorials.git -b master && rosdep install -y --from-paths . --ignore-src --rosdistro noetic && cd ~/ws_moveit && catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release && catkin build && echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
 
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 EXPOSE 6080/tcp
