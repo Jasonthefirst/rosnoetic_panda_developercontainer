@@ -49,12 +49,21 @@ Alle Fenster die ihr im Container öffnet, werden hier sichtbar.
 
 #### Panda Gazebo
 
+##### cartesian impedance controller
+
 Mit dem Befehl:
 'roslaunch franka_gazebo panda.launch x:=-0.5 \
     world:=$(rospack find franka_gazebo)/world/stone.sdf \
     controller:=cartesian_impedance_example_controller \
     rviz:=true'
 öffnet ihr einen Simulator + Visualisierer vom Panda Roboter mit einem kartesischen Impedanz Controller. Es sind nun alle RosTopics geladen um den (virtuellen) Roboter zu steuern.
+
+##### moveit position controller
+
+Mit dem Befehl
+
+''' roslaunch panda_moveit_config demo_gazebo.launch rviz_tutorial:=true '''
+könnt ihr einen Gazebo Simulator mit RVIZ und Moveit starten. Ihr müsst dazu noch in rviz eine MotionPlanning Visualisierung hinzufügen. Die entsprechenden Topics sind aber auch ohne das gestartet.
 
 
 ### Eigenen Code erstellen: 
