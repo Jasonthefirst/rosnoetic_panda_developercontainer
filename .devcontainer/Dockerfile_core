@@ -4,13 +4,13 @@ FROM osrf/ros:noetic-desktop-full
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends ros-noetic-libfranka ros-noetic-franka-ros ros-noetic-moveit git
+    && apt-get -y install --no-install-recommends ros-noetic-libfranka ros-noetic-franka-ros ros-noetic-moveit ros-noetic-effort-controllers git
 
 
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 RUN rosdep update
 
-RUN apt install -y --no-install-recommends ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon python3-wstool
+RUN apt install -y --no-install-recommends ros-noetic-catkin python3-catkin-tools python3-osrf-pycommon python3-wstool python3-pip
 
 RUN mkdir -p ~/ws_moveit/src
 RUN cd ~/ws_moveit/src && wstool init . && wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall && wstool remove  moveit_tutorials && wstool update -t .
