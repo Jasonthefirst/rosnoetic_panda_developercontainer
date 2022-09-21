@@ -23,28 +23,26 @@ Robots:
 ## Installation
 
 ### local Windows installation
-1. Visual Studio Code
-(Install help: https://code.visualstudio.com/docs/remote/containers)
-2. WSL 
-    (https://learn.microsoft.com/de-de/windows/wsl/install)
-3. Docker https://docs.docker.com/desktop/install/windows-install/
-4. Create a fork of this repository.
-5. Clone the Repository in your WSL environment (git clone ...)
-6. Open the repository with "code ." in the repository folder.
-7. Use ctrl + shift + p "Remote-Containers: Open in Container" to open the container in a docker environment. You have now all the necessary Tools installed.
+1. [Visual Studio Code](https://code.visualstudio.com/docs/remote/containers)
+1. [WSL](https://learn.microsoft.com/de-de/windows/wsl/install)
+2. [Docker](https://docs.docker.com/desktop/install/windows-install/)
+3. Create a fork of this repository.
+4. Clone the Repository in your WSL environment (`git clone ...`)
+5. Open the repository with `code .` in the repository folder.
+6. Use `ctrl + shift + p` *Remote-Containers: Open in Container* to open the container in a docker environment. You have now all the necessary Tools installed.
 
 ### on a linux computer (or the computer connected to the real robot)
 
 1. Create a fork of this repository.
-2. Clone the Repository in your WSL environment (git clone ...)
-3. Open the repository with "code ." in the repository folder.
-4. Use ctrl + shift + p "Remote-Containers: Open in Container" to open the container in a docker environment. You have now all the necessary Tools installed.
+2. Clone the Repository in your WSL environment `git clone ...`
+3. Open the repository with `code .` in the repository folder.
+4. Use `ctrl + shift + p` *Remote-Containers: Open in Container* to open the container in a docker environment. You have now all the necessary Tools installed.
 
 ### Functions:
 
 #### Desktop Environment
-Go to: http://localhost:6080/ in your browser. The Password: "vscode" opens a desktop environment of the container in your browser. All windows you open in the container are shown here.
-![desktop environment - not signed in](/screenshots/webdesktopenvironment.png "Desktop environment")
+Go to: [http://localhost:6080/](http://localhost:6080/) in your browser. The Password: "vscode" opens a desktop environment of the container in your browser. All windows you open in the container are shown here.
+![desktop environment - not signed in](/screenshots/webdesktopenvironment.png "Desktop environment" =100x20)
 
 
 #### Control the real Panda
