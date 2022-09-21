@@ -1,6 +1,6 @@
 # ROSNoeticStandardContainer
 
-This is a visual studio code development container with ros noetic installed. 
+This is a visual studio code development container with ros noetic installed to control a Franka Panda Robot in a simulation and real environment. 
 
 Install Visual studio code with the remote container extension, clone this repository and enjoy a container with everything for ROS and Panda installed. 
 
@@ -22,102 +22,98 @@ Robots:
 
 ## Installation
 
-### lokale Windows installation
+### local Windows installation
 1. Visual Studio Code
-(Erläuterung: https://code.visualstudio.com/docs/remote/containers)
+(Install help: https://code.visualstudio.com/docs/remote/containers)
 2. WSL 
     (https://learn.microsoft.com/de-de/windows/wsl/install)
 3. Docker https://docs.docker.com/desktop/install/windows-install/
-4. Erstellt euch einen Fork von dem Repository
-5. Cloned das Repository in die WSL Umgebung (git clone ...)
-6. Öffnet das Repository in Visual Studio code mit "code ." in dem Repository Ordner.
-7. Führt mit strg + shift + p "Remote-Containers: Open in Container" aus. Ihr seid nun in der Umgebung mit allen benötigten Paketen.
+4. Create a fork of this repository.
+5. Clone the Repository in your WSL environment (git clone ...)
+6. Open the repository with "code ." in the repository folder.
+7. Use ctrl + shift + p "Remote-Containers: Open in Container" to open the container in a docker environment. You have now all the necessary Tools installed.
+
+### on a linux computer (or the computer connected to the real robot)
+
+1. Create a fork of this repository.
+2. Clone the Repository in your WSL environment (git clone ...)
+3. Open the repository with "code ." in the repository folder.
+4. Use ctrl + shift + p "Remote-Containers: Open in Container" to open the container in a docker environment. You have now all the necessary Tools installed.
+
+### Functions:
+
+#### Desktop Environment
+Go to: http://localhost:6080/ in your browser. The Password: "vscode" opens a desktop environment of the container in your browser. All windows you open in the container are shown here.
+![desktop environment - not signed in](/screenshots/webdesktopenvironment.png "Desktop environment")
 
 
-### auf dem Roboter PC
-
-1. Erstellt euch einen Fork von dem Repository
-2. Cloned das Repository in die WSL Umgebung (git clone ...)
-3. Öffnet das Repository in Visual Studio code mit "code ." in dem Repository Ordner.
-4. Führt mit strg + shift + p "Remote-Containers: Open in Container" aus. Ihr seid nun in der Umgebung mit allen benötigten Paketen.
-
-### Funktionen:
-
-#### Desktopumgebung
-Geht in eurem Browser auf: http://localhost:6080/. Mit dem Passwort: "vscode" könnt ihr die Desktopumgebung des Systems im Container aufrufen.
-Alle Fenster die ihr im Container öffnet, werden hier sichtbar. 
-
-#### Echter Panda
-Denkt dran, dass ihr in der Roboter Desk Umgebung die *FCI aktiviert* und der Roboter blau leuchtet weil ihr ihn mit der Fernkontrolle freigeschaltet habt.
+#### Control the real Panda
+Remember to activate the panda FCI in the DESK environment with "Activate FCI" and the robot leds should be blue.
 
 ##### MoveIt Position Controller
-mit dem Befehl: 
-'''
-roslaunch panda_moveit_config franka_control.launch robot_ip:=172.16.0.2
-'''
-startet ihr die Control Node des Pandas. Jetzt könnt ihr die Standardfunktionen des echten Pandas steuern.
-In der Desktopumgebung könnt ihr außerdem RVIZ mit MoveIT sehen und den Roboter zu unterschiedlichen Positionen fahren. 
+execute: 
+
+    roslaunch panda_moveit_config franka_control.launch robot_ip:=172.16.0.2
+
+This opens the control node of the panda. You can now use the main functions of the panda with access to moveit and the ability to send the robot to x,y,z coordinates. In the [desktop environment](#### Desktop Environment) you can use RVIZ and MoveIT to send the robot to coordinates.
+
+If you move the robot with your hand or the robot was reaching a difficult edge position and won't move further you can recover the robot with: 
 
 
-Wechselt ihr zwischen Roboter mit der Hand führen und Roboter fährt selbst oder der Roboter ist an seine Grenzen gekommen, könnt ihr mit dem Befehl:
+    rostopic pub -1 /franka_control/error_recovery/goal franka_msgs/ErrorRecoveryActionGoal "{}"
 
-'''
-rostopic pub -1 /franka_control/error_recovery/goal franka_msgs/ErrorRecoveryActionGoal "{}"
-'''
-die Robotersteuerung wieder freigeben.
 
 ##### cartesian impedance controller
 
-Mit:
 
-'''
-roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=172.16.0.2
-'''
-wird ein cartesian impedance controller gestartet den ihr dann ebenfalls über die RVIZ steuerung in der Webumgebung steuern könnt.
+    roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=172.16.0.2
+
+opens the robot control with RVIZ and a cartesian impedance controller. You can move the robot in RVIZ in the [desktop environment](#### Desktop Environment). 
 
 #### Panda Gazebo (Simulation)
 
 ##### cartesian impedance controller
 
-Mit dem Befehl:
-'roslaunch franka_gazebo panda.launch x:=-0.5 \
+
+    roslaunch franka_gazebo panda.launch x:=-0.5 \
     world:=$(rospack find franka_gazebo)/world/stone.sdf \
     controller:=cartesian_impedance_example_controller \
-    rviz:=true'
-öffnet ihr einen Simulator + Visualisierer vom Panda Roboter mit einem kartesischen Impedanz Controller. Es sind nun alle RosTopics geladen um den (virtuellen) Roboter zu steuern.
+    rviz:=true
+
+opens RVIZ and gazebo with a simulation of the panda robot with a cartesian impedance controller. All ROSTopics are loaded to control the virtual robot.
+
+![Gazebo RVIZ Sim](/screenshots/gazebocartesianrvizsim.png "Gazebo RVIZ Sim")
 
 ##### moveit position controller
 
-Mit dem Befehl
+    roslaunch panda_moveit_config demo_gazebo.launch rviz_tutorial:=true
 
-''' roslaunch panda_moveit_config demo_gazebo.launch rviz_tutorial:=true '''
-könnt ihr einen Gazebo Simulator mit RVIZ und Moveit starten. Ihr müsst dazu noch in rviz eine MotionPlanning Visualisierung hinzufügen. Die entsprechenden Topics sind aber auch ohne das gestartet.
-
-
-### Eigenen Code erstellen: 
-
-Um ein eigenes ROS Package zu erstellen müsst ihr ein catkin package in /workspace/catkin_ws/src erstellen (oder reinclonen). http://wiki.ros.org/ROS/Tutorials/CreatingPackage
-
-mit "catkin_make" in /workspace/catkin_ws wird dieses Package kompiliert und alle Funktionen stehen zur Verfügung nachdem ihr mit source /workspace/catkin_ws/devel/setup.bash den Workspace gesourced habt.
+opens RVIZ and gazebo with a simulation of the panda robot with a moveit position controller. You can now add a motion planner in RVIZ if you want. But all move_group topics to control the robot are now started.
 
 
-## Fehlerbehebung:
+### Create a own package/node: 
 
-### Probleme beim Clonen in einen Remote development container
-Falls das Clonen eines Remote Developmentcontainers nicht funktionieren sollte, probiert ob ihr es in den Folder "workspace" clonen könnt. 
+to create a own ROS Package you create a catkin package in /workspace/catkin_ws/src. You can also clone another ROS package in and work with this. [create a ROS Package](http://wiki.ros.org/ROS/Tutorials/CreatingPackage)
+
+You compile the workspace With `catkin_make` in /workspace/catkin_ws. To use the compiled functions source the workspace setup.bash with `source /workspace/catkin_ws/devel/setup.bash`.
 
 
-### Probleme beim Starten des Containers
-Eventuell ist keine geeignete GPU vorhanden. Kommentiert dann den Teil:
+## Errorhandling:
 
-''' deploy:
+### problems while cloning the development container in a remote pc
+try if you can clone it in another folder. 
+
+
+### GPU not found
+You can give the container GPU ability with
+
+    deploy:
       resources:
         reservations:
           devices:
             - capabilities: ["gpu"]
-'''
 
-im Dockerfile aus. 
 
-### RealTime Kernel wird nicht gefunden 
-Wenn der echte Roboter keine Topics zulässt und eine Beschwerde meldet, dass kein Realtimekernel läuft, noch mal neustarte und im Bootmenu unter advanced settings einen RT Kernel auswählen.
+### No realtime kernel
+
+To work the franka panda needs a realtime kernel. Either you already have one installed and need to reboot to choose a kernel in the advanced settings. If you don't have a real time kernel you need to install one [explanation](https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel)
