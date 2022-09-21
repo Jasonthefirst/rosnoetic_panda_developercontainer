@@ -67,7 +67,12 @@ die Robotersteuerung wieder freigeben.
 
 ##### cartesian impedance controller
 
+Mit:
 
+'''
+oslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=172.16.0.2
+'''
+wird ein cartesian impedance controller gestartet den ihr dann ebenfalls über die RVIZ steuerung in der Webumgebung steuern könnt.
 
 #### Panda Gazebo (Simulation)
 
