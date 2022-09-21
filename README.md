@@ -47,7 +47,29 @@ Robots:
 Geht in eurem Browser auf: http://localhost:6080/. Mit dem Passwort: "vscode" könnt ihr die Desktopumgebung des Systems im Container aufrufen.
 Alle Fenster die ihr im Container öffnet, werden hier sichtbar. 
 
-#### Panda Gazebo
+#### Echter Panda
+
+##### MoveIt Position Controller
+mit dem Befehl: 
+'''
+roslaunch panda_moveit_config franka_control.launch robot_ip:=172.16.0.2
+'''
+startet ihr die Control Node des Pandas. Jetzt könnt ihr die Standardfunktionen des echten Pandas steuern.
+In der Desktopumgebung könnt ihr außerdem RVIZ mit MoveIT sehen und den Roboter zu unterschiedlichen Positionen fahren. 
+Denkt dran, dass ihr in der Roboter Desk Umgebung die FCI aktiviert und der Roboter blau leuchtet weil ihr ihn mit der Fernkontrolle freigeschaltet habt.
+
+Wechselt ihr zwischen Roboter mit der Hand führen und Roboter fährt selbst oder der Roboter ist an seine Grenzen gekommen, könnt ihr mit dem Befehl:
+
+'''
+rostopic pub -1 /franka_control/error_recovery/goal franka_msgs/ErrorRecoveryActionGoal "{}"
+'''
+die Robotersteuerung wieder freigeben.
+
+##### cartesian impedance controller
+
+
+
+#### Panda Gazebo (Simulation)
 
 ##### cartesian impedance controller
 
@@ -90,3 +112,6 @@ Eventuell ist keine geeignete GPU vorhanden. Kommentiert dann den Teil:
 '''
 
 im Dockerfile aus. 
+
+### RealTime Kernel wird nicht gefunden 
+Wenn der echte Roboter keine Topics zulässt und eine Beschwerde meldet, dass kein Realtimekernel läuft, noch mal neustarte und im Bootmenu unter advanced settings einen RT Kernel auswählen.

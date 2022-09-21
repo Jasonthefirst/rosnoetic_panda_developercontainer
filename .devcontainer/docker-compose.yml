@@ -6,6 +6,10 @@ services:
       dockerfile: .devcontainer/Dockerfile
     cap_add:
       - SYS_NICE
+    ulimits:
+      rtprio: 99
+      rttime: -1
+      memlock: 8428281856
     # ports: 
     #   - 11311:11311
     network_mode: "host"

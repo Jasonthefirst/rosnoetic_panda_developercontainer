@@ -1,0 +1,4 @@
+{
+    "cmake.sourceDirectory": "/workspace/catkin_ws/src",
+    "cmake.configureOnOpen": true
+}
