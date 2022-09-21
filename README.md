@@ -48,6 +48,7 @@ Geht in eurem Browser auf: http://localhost:6080/. Mit dem Passwort: "vscode" k�
 Alle Fenster die ihr im Container öffnet, werden hier sichtbar. 
 
 #### Echter Panda
+Denkt dran, dass ihr in der Roboter Desk Umgebung die *FCI aktiviert* und der Roboter blau leuchtet weil ihr ihn mit der Fernkontrolle freigeschaltet habt.
 
 ##### MoveIt Position Controller
 mit dem Befehl: 
@@ -56,7 +57,7 @@ roslaunch panda_moveit_config franka_control.launch robot_ip:=172.16.0.2
 '''
 startet ihr die Control Node des Pandas. Jetzt könnt ihr die Standardfunktionen des echten Pandas steuern.
 In der Desktopumgebung könnt ihr außerdem RVIZ mit MoveIT sehen und den Roboter zu unterschiedlichen Positionen fahren. 
-Denkt dran, dass ihr in der Roboter Desk Umgebung die FCI aktiviert und der Roboter blau leuchtet weil ihr ihn mit der Fernkontrolle freigeschaltet habt.
+
 
 Wechselt ihr zwischen Roboter mit der Hand führen und Roboter fährt selbst oder der Roboter ist an seine Grenzen gekommen, könnt ihr mit dem Befehl:
 
@@ -70,7 +71,7 @@ die Robotersteuerung wieder freigeben.
 Mit:
 
 '''
-oslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=172.16.0.2
+roslaunch franka_example_controllers cartesian_impedance_example_controller.launch robot_ip:=172.16.0.2
 '''
 wird ein cartesian impedance controller gestartet den ihr dann ebenfalls über die RVIZ steuerung in der Webumgebung steuern könnt.
 
