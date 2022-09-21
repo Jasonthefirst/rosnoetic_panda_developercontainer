@@ -42,7 +42,8 @@ Robots:
 
 #### Desktop Environment
 Go to: [http://localhost:6080/](http://localhost:6080/) in your browser. The Password: "vscode" opens a desktop environment of the container in your browser. All windows you open in the container are shown here.
-![desktop environment - not signed in](/screenshots/webdesktopenvironment.png "Desktop environment" =100x20)
+
+<img src="/screenshots/webdesktopenvironment.png"  width="300" height="300">
 
 
 #### Control the real Panda
