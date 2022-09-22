@@ -1,3 +1,5 @@
+# This repository will not be maintained anymore. Please find the new maintained repository at: https://gitlab.fristerspace.de/demian/rosnoetic_panda_developercontainer
+
 # ROSNoeticStandardContainer
 
 This is a visual studio code development container with ros noetic installed to control a Franka Panda Robot in a simulation and real environment. 
